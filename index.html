@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center;">
+    <label for="Kur"> Kur </label>
+    <select name="Kur" id="Kur">
+        <option value="USD" onclick="kur()">USD</option>
+        <option value="EUR" onclick="kur()">EUR</option>
+        <option value="GBP" onclick="kur()">GBP</option>
+        <option value="TRY" onclick="kur()">TRY</option>
+
+    </select>
+    <br>
+    <br>
+
+    <span id="sonuc"></span>
+    <br>
+    <button onclick="kura()">
+        Güncelle
+    </button>
+    <script>
+
+            let hiyar
+                            fetch("https://v6.exchangerate-api.com/v6/b460d927832de9f8e67451c2/latest/TRY")
+                    .then(function(response) {
+                    return response.json();
+                    }).then(function(data) {
+                        console.log(data.conversion_rates);
+                    hiyar = data.conversion_rates
+                        console.log(hiyar.try)
+                    })
+                    function kura(){
+                        let kur = document.getElementById("Kur").value
+                        console.log(kur)
+                        document.getElementById("sonuc").innerHTML = 1 / hiyar[kur]
+
+                    }
+                    setTimeout(function(){
+                        kura()
+                    },1000)
+    </script>
+</div>
+</body>
+</html>
